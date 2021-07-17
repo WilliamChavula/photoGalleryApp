@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using photoGalleryApp.Interfaces;
 using photoGalleryApp.ViewModels;
 using Xamarin.Forms;
 
@@ -39,6 +40,8 @@ namespace photoGalleryApp
             {
                 ContainerBuilder.RegisterType(type.AsType());
             }
+
+            ContainerBuilder.RegisterType<FormsLocalStorage>().As<ILocalStorage>();
         }
     }
 }
