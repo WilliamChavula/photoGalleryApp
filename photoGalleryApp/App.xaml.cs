@@ -10,7 +10,7 @@ namespace photoGalleryApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainShell();
         }
 
         protected override void OnStart()

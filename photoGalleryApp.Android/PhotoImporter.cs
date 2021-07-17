@@ -21,12 +21,14 @@ namespace photoGalleryApp.Droid
         {
         }
 
+        [Obsolete]
         public bool ContinueWithPermission(bool granted)
         {
             if (!granted)
                 return false;
 
             Android.Net.Uri imageUri = MediaStore.Images.Media.ExternalContentUri;
+
             var cursor = MainActivity.Current.ContentResolver.Query(imageUri, null,
                 MediaStore.IMediaColumns.MimeType + "=? or " + MediaStore.IMediaColumns.MimeType + "=?",
                 new string[] { "image/jpeg", "image/png" }, MediaStore.IMediaColumns.DateModified);
@@ -35,7 +37,7 @@ namespace photoGalleryApp.Droid
 
             while (cursor.MoveToNext())
             {
-                string path = cursor.GetString(cursor.GetColumnIndex(MediaStore.Images.IImageColumns.BucketId));
+                string path = cursor.GetString(cursor.GetColumnIndex(MediaStore.Images.ImageColumns.Data));
                 paths.Add(path);
             }
 
@@ -45,6 +47,7 @@ namespace photoGalleryApp.Droid
             return true;
         }
 
+        [Obsolete]
         public async Task<ObservableCollection<Photo>> Get(int start, int count, Quality quality = Quality.Low)
         {
             if (result == null)
@@ -92,6 +95,7 @@ namespace photoGalleryApp.Droid
             return photos;
         }
 
+        [Obsolete]
         public async Task<ObservableCollection<Photo>> Get(List<string> filenames, Quality quality = Quality.Low)
         {
             if (result == null)
@@ -133,6 +137,7 @@ namespace photoGalleryApp.Droid
             return photos;
         }
 
+        [Obsolete]
         private async Task<bool> Import()
         {
             string[] permissions = { Manifest.Permission.ReadExternalStorage };
